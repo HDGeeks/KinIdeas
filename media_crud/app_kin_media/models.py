@@ -11,44 +11,49 @@ def user_directory_path(self, filename):
 
 
 class Genre(models.model):
-    """    YEAR_IN_SCHOOL_CHOICES = [
-    ('FR', 'Freshman'),
-    ('SO', 'Sophomore'),
-    ('JR', 'Junior'),
-    ('SR', 'Senior'),
-    ('GR', 'Graduate'),
-    ] """
-    genre_id=models.IntegerField(max_lengt=50 ,primary_key=True)
-    genre_name=models.CharField(max_length=50)
-    genre_cover=models.ImageField()
+    """ CATEGORY = (  ('solo', 'solo'),
+                ('jazz', 'jazz'),
+                ('ambasel','ambasel'),
+                ('bati', 'bati')
+                ) """
+    genre_id=models.IntegerField(max_lengt=50 ,primary_key=True ,blank=False ,null=False)
+    genre_name=models.CharField(max_length=50 ,blank=False ,null=False)
+    #genre_cover=models.ImageField()
     genre_description=models.CharField(max_length=100)
 
 class Artist(models.model):
-    artist_id=models.IntegerField(max_lengt=50 ,primary_key=True)
-    artist_name=models.CharField(max_length=50)
+    artist_id=models.IntegerField(max_lengt=50 ,primary_key=True ,blank=False ,null=False)
+    artist_name=models.CharField(max_length=50 ,blank=False ,null=False)
     artist_cover=models.ImageField()
-    artist_description=models.CharField(max_length=100)
-    genre_id = models.ForeignKey(Genre, on_delete=models.CASCADE)
+    artist_description=models.CharField(max_length=100 ,null=False)
+    #genre_id = models.ForeignKey(Genre, on_delete=models.CASCADE)
+    genre_id=models.ManyToManyField(Genre, on_delete=models.CASCADE)
 
 
 
 class Album(models.model):
-    genre_id=Genre.genre_id
-    artist_id=Artist.artist_id
-    album_id=models.IntegerField(max_lengt=50,primary_key=True)
-    album_name=models.CharField(max_length=50)
+    album_id=models.IntegerField(max_lengt=50,primary_key=True ,blank=False ,null=False)
+    album_name=models.CharField(max_length=50 ,blank=False ,null=False) 
     album_cover=models.ImageField()
-    album_description=models.CharField(max_length=100)
+    album_description=models.CharField(max_length=100 ,null=False) 
     album_release_date=models.DateTimeField
+    #artist_id= models.ForeignKey(Artist, on_delete=models.CASCADE)
+    #genre_id = models.ForeignKey(Genre, on_delete=models.CASCADE)
+    genre_id=models.ManyToManyField(Genre, on_delete=models.CASCADE)
+    artist_id=models.ManyToManyField(Artist, on_delete=models.CASCADE)
 
+    
 class Track(models.Model):
-    track_id=models.IntegerField(max_length=50 , primary_key=True)
-    genre_id=Genre.genre_id
-    artist_id=Artist.artist_id
-    album_id=Album.album_id
+    track_id=models.IntegerField(max_length=50 , primary_key=True ,blank=False ,null=False)
+    track_name = models.CharField(max_length=30 ,blank=False ,null=False)
+    track_description=models.CharField(max_length=100 ,null=False)
+    track_release_date=models.DateTimeField
+    genre_id = models.ForeignKey(Genre, on_delete=models.CASCADE)
+    artist_id= models.ForeignKey(Artist, on_delete=models.CASCADE)
+    album_id= models.ForeignKey(Album, on_delete=models.CASCADE)
     album_cover=Album.album_cover
-    track_description=models.CharField(max_length=100)
-    track_name = models.CharField(max_length=30)
+    track_audio=models.FilePathField
 
 
-   
+
+
