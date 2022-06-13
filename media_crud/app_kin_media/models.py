@@ -27,7 +27,7 @@ class Artist(models.model):
     artist_cover=models.ImageField()
     artist_description=models.CharField(max_length=100 ,null=False)
     #genre_id = models.ForeignKey(Genre, on_delete=models.CASCADE)
-    genre_id=models.ManyToManyField(Genre, on_delete=models.CASCADE)
+    genre_id=models.ManyToManyRel(Genre, on_delete=models.CASCADE)
 
 
 
@@ -39,8 +39,8 @@ class Album(models.model):
     album_release_date=models.DateTimeField
     #artist_id= models.ForeignKey(Artist, on_delete=models.CASCADE)
     #genre_id = models.ForeignKey(Genre, on_delete=models.CASCADE)
-    genre_id=models.ManyToManyField(Genre, on_delete=models.CASCADE)
-    artist_id=models.ManyToManyField(Artist, on_delete=models.CASCADE)
+    genre_id=models.ManyToManyRel(Genre, on_delete=models.CASCADE)
+    artist_id=models.ManyToOneRel(Artist, on_delete=models.CASCADE)
 
     
 class Track(models.Model):
@@ -48,10 +48,13 @@ class Track(models.Model):
     track_name = models.CharField(max_length=30 ,blank=False ,null=False)
     track_description=models.CharField(max_length=100 ,null=False)
     track_release_date=models.DateTimeField
-    genre_id = models.ForeignKey(Genre, on_delete=models.CASCADE)
-    artist_id= models.ForeignKey(Artist, on_delete=models.CASCADE)
-    album_id= models.ForeignKey(Album, on_delete=models.CASCADE)
-    album_cover=Album.album_cover
+    #genre_id = models.ForeignKey(Genre, on_delete=models.CASCADE)
+    #artist_id= models.ForeignKey(Artist, on_delete=models.CASCADE)
+    #album_id= models.ForeignKey(Album, on_delete=models.CASCADE)
+    genre_id=models.ManyToManyRel(Genre, on_delete=models.CASCADE)
+    artist_id=models.ManyToOneRel(Artist, on_delete=models.CASCADE)
+    album_id=models.ManyToOneRel(Album, on_delete=models.CASCADE, null=True, blank=True)
+    album_cover=Album.album_cover (null=True, blank=True)
     track_audio=models.FilePathField
 
 
