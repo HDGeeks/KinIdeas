@@ -1,61 +1,45 @@
 from django.contrib import admin
+from django.db import models
 
-from .models import Genre ,Artist ,Album , Artist , Track
+from .models import Artist , Album , Track
 # Register your models here.
 
-admin.site.register(Genre)
+
 admin.site.register(Artist)
 admin.site.register(Album)
-admin.site.register(Artist)
 admin.site.register(Track)
 
-from django.contrib import admin
-from . import models
 
-@admin.register(models.Category)
-
-class CatAdmin(admin.ModelAdmin):
+""" @admin.register(Artist)
+class ArtistAdmin(admin.ModelAdmin):
 	list_display = [
-        'name',
+        'artist_name',
+        'artist_photo',
         ]
-
-@admin.register(models.Quizzes)
-
-class QuizAdmin(admin.ModelAdmin):
-	list_display = [
-        'id', 
-        'title',
-        ]
-
-class AnswerInlineModel(admin.TabularInline):
-    model = models.Answer
+@admin.register(Album)
+class AlbumInlineModel(admin.TabularInline):
+    model = Album
     fields = [
-        'answer_text', 
-        'is_right'
+        'album_name', 
+        'album_genre',
+        'album_release_date'
+
         ]
 
-@admin.register(models.Question)
 
-class QuestionAdmin(admin.ModelAdmin):
+@admin.register(Track)
+class TrackAdmin(admin.ModelAdmin):
     fields = [
-        'title',
-        'quiz',
+        'track_name',
+        'album',
         ]
     list_display = [
-        'title', 
-        'quiz',
-        'date_updated'
+        'artist', 
+       
         ]
     inlines = [
-        AnswerInlineModel, 
-        ] 
+        AlbumInlineModel, 
+        ]  """
 
-@admin.register(models.Answer)
 
-class AnswerAdmin(admin.ModelAdmin):
-    list_display = [
-        'answer_text', 
-        'is_right', 
-        'question'
-        ]
 

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # app
+    'app_kin_media',
 
     #cors 
     "corsheaders",
@@ -46,6 +47,7 @@ INSTALLED_APPS = [
     'drf_yasg',
     #rest_framework
     'rest_framework',
+   
 ]
 REST_FRAMEWORK = {
     
