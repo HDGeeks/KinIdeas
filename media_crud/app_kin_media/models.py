@@ -67,6 +67,7 @@ class Album(models.Model):
     def __str__(self):
         return self.album_name , self.album_release_date
 
+    
 class Track(models.Model):
 
     track_id=models.AutoField(primary_key=True)
@@ -92,4 +93,3 @@ class Track(models.Model):
         
 
 
-   
