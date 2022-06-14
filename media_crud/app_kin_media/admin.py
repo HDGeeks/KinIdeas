@@ -9,16 +9,16 @@ admin.site.register(Artist)
 admin.site.register(Album)
 admin.site.register(Track)
 
-
-""" @admin.register(Artist)
-class ArtistAdmin(admin.ModelAdmin):
+""" 
+@admin.register(Artist)
+class ArtistAdmin(admin.TabularInline):
 	list_display = [
         'artist_name',
         'artist_photo',
         ]
 @admin.register(Album)
 class AlbumInlineModel(admin.TabularInline):
-    model = Album
+    model = Artist
     fields = [
         'album_name', 
         'album_genre',
@@ -28,7 +28,8 @@ class AlbumInlineModel(admin.TabularInline):
 
 
 @admin.register(Track)
-class TrackAdmin(admin.ModelAdmin):
+class TrackAdmin(admin.TabularInline):
+    model: Album
     fields = [
         'track_name',
         'album',
@@ -39,7 +40,7 @@ class TrackAdmin(admin.ModelAdmin):
         ]
     inlines = [
         AlbumInlineModel, 
-        ]  """
+        ]  
 
-
+ """
 

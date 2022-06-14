@@ -1,13 +1,13 @@
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path ,include
 from rest_framework import permissions
 from django.conf.urls.static import static
 from . import settings
 
 # api documentation
-from drf_yasg.views import get_schema_view
-from drf_yasg import openapi
+from drf_yasg2.views import get_schema_view
+from drf_yasg2 import openapi
 
 schema_view = get_schema_view(
     # API schema for our accounts
@@ -30,6 +30,8 @@ urlpatterns = [
      # API documentation urls
     path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
+
+    path('api/', include('app_kin_media.urls')),
 
 ]
 if settings.DEBUG:
