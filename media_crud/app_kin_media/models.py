@@ -74,9 +74,9 @@ class Track(models.Model):
     artist = models.ForeignKey(
         Artist , default=1 , on_delete=models.DO_NOTHING)
     album = models.ForeignKey(
-        Album, default=1 , on_delete=models.DO_NOTHING)
-    #album_cover = models.ForeignKey(
-        #Album , default=1 , on_delete=models.DO_NOTHING)
+        Album,related_name='album_nmae' , default=1 , on_delete=models.DO_NOTHING)
+    music_cover = models.ForeignKey(
+       Album ,related_name='music_pic', default=1 , on_delete=models.DO_NOTHING)
     track_description=models.CharField(max_length=100)
     track_name= models.CharField(max_length=50 , null=False ,blank=False)
     track_file = models.FileField(upload_to='' , null=True)

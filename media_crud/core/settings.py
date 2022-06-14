@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     #cors 
     "corsheaders",
     #drf_yasg
-    'drf_yasg',
+    'drf_yasg2',
     #rest_framework
     'rest_framework',
    
@@ -132,6 +132,8 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+
 
 
 # Password validation
