@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Genre ,Artist ,Album , Track
+from .models import Artist ,Album ,Track
 
 
 
@@ -9,14 +9,14 @@ from .models import Artist, Album, Track
 class TrackSerializer(serializers.ModelSerializer):
     class Meta:
         model = Track
-        fields = ("album" , "track_name", "track_file", "cover_image", "duration", "created_at", "updated_at", "track_age", "track_sex", "tracks_martial_status")
+        fields = ("track_id" , "artist", "album ", "track_description", "track_name", "track_file", "duration",)
 
 class AlbumSerializer(serializers.ModelSerializer):
     tracks = TrackSerializer(many=True)
 
     class Meta:
         model = Album
-        fields = ("artist" , "album_name", "album_cover")
+        fields = ("album_id" , "artist", " album_genre","album_name","album_cover", "album_description", "album_release_date")
 
     def create(self, validated_data):
         tracks_data = validated_data.pop('tracks')
@@ -30,7 +30,7 @@ class ArtistSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Artist
-        fields = ("artist_id" , "arists_name", "profile_image")
+        fields = ("artist_id" , "arists_name", "artist_photo", "artist_description")
 
     def create(self, validated_data):
         albums_data = validated_data.pop('albums')
